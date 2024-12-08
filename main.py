@@ -309,7 +309,7 @@ questions = [
         "Orientar as embarcações e fortalecer o comércio"
     },
 
-    #idade media
+    # idade media
     {
         "id":
         27,
@@ -1110,5 +1110,16 @@ def get_questions():
     return jsonify(questions)
 
 
+@app.route('/questions/<int:id>', methods=['GET'])
+def get_question_by_id(id):
+    # Procura a pergunta com o id fornecido
+    question = next((q for q in questions if q['id'] == id), None)
+
+    if question is None:
+        return jsonify({"error": "Question not found"}), 404
+
+    return jsonify(question)
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=1950, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
