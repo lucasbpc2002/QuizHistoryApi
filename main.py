@@ -1121,5 +1121,20 @@ def get_question_by_id(id):
     return jsonify(question)
 
 
+@app.route('/questions/<int:age>/', methods=['GET'])
+def get_question_by_age(age):
+    # Procura a pergunta com o id fornecido
+    lista = []
+    lista_option=[]
+    for q in questions:
+        if (q['age'] == age):
+            
+            lista.append([q['id'],q['question'], q['answer'],q['options']])
+            # lista.append(q['id'])
+        # question = next((q for q in questions if q['age'] == age), lista.append(age))
+
+    return jsonify(lista)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
